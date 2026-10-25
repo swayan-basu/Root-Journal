@@ -1,0 +1,41 @@
+site_name: Root Journal
+site_description: Documenting practical lab challenges, practical learning writeups, and walkthroughs.
+site_author: Swayan Basu
+
+
+theme:
+  name: material
+  favicon: assets/images/rootjournal.png
+  logo: assets/images/rootjournal.png
+  palette:
+    #Dark mode
+    - scheme: slate #Dark mode
+      primary: deep purple
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: switch to light mode
+
+   #Light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: switch to dark mode
+
+  features:
+    - navigation.expand
+    - content.code,copy
+    - navigation.tabs
+    - search.suggest
+    - search.highlight
+
+extra_css:
+  - stylesheets/extra.css 
+nav:
+  - Home: index.md
+  - Web Testing Labs:
+       -  DVWA Assessment: web-security/dvwa-report.md
+  - TryHackMe:
+       - Walkthroughs: tryhackme/index.md
