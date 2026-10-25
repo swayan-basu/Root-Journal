@@ -35,7 +35,7 @@ extra_css:
   - stylesheets/extra.css 
 nav:
   - Home: index.md
-  - Web Testing Labs:
-       -  DVWA Assessment: web-security/dvwa-report.md
-  - TryHackMe:
-       - Walkthroughs: tryhackme/index.md
+  #- Web Testing Labs:
+  #     -  DVWA Assessment: web-testing/dvwa-report.md
+  #- TryHackMe:
+  #     - Walkthroughs: tryhackme/index.md
