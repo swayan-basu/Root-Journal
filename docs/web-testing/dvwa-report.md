@@ -107,13 +107,13 @@ PHPSESSID=1918049c64aedbbb198f608b70675cb7
 
 ​**Proxy History Log:** Captured consecutive telemetry entries tracking repeated credential update payloads returning a 200 OK status.  
 
-​#### Results:
-​* **Application Response:** The server processed the request and displayed the confirmation text: "Password Changed."  
-​* **Validation Flaw:** The application successfully modified the account credentials without requiring the user to re-enter their current password or verifying a unique per-session cryptographic token.
+#### Results:
+* **Application Response:** The server processed the request and displayed the confirmation text: "Password Changed."
+* **Validation Flaw:** The application successfully modified the account credentials without requiring the user to re-enter their current password or verifying a unique per-session cryptographic token.
 
-​#### Remediation Recommendations:
-​* **Implement Anti-CSRF Tokens:** Embed unique, unpredictable, server-validated tokens into all state-changing form submissions.
-​* **Require Re-Authentication:** Force users to provide their existing password before allowing credential updates.
+#### Remediation Recommendations:
+* **Implement Anti-CSRF Tokens:** Embed unique, unpredictable, server-validated tokens into all state-changing form submissions.
+* **Require Re-Authentication:** Force users to provide their existing password before allowing credential updates.
 ​* **Use POST for State Changes:** Restrict sensitive data modifications to POST requests rather than predictable GET parameters.
 
 <img width="1570" height="36" alt="csrf-zap02" src="https://github.com/user-attachments/assets/1f6063b0-3422-4bed-8a5d-1e85d42163f1" />
@@ -239,10 +239,10 @@ Demonstrates critical database exposure where unauthorized users can bypass auth
 ---
 
 ### Module 8: Weak Session IDs
-​* **Endpoint:** /vulnerabilities/weak_id/
+* **Endpoint:** /vulnerabilities/weak_id/
 ​* **Severity:** Medium
 
-​#### Vulnerability Details:
+#### Vulnerability Details:
 ​The application generates session tokens (cookies) using a predictable pattern or incremental counter (such as sequential numbers). Because the values follow a recognizable sequence, an attacker can easily anticipate or calculate future session IDs to hijack active user accounts.
 ​
 #### Testing Steps:
@@ -250,12 +250,13 @@ Demonstrates critical database exposure where unauthorized users can bypass auth
 ​2. Clicked the Generate button multiple times to issue new dvwa Session cookies.
 3. Monitored OWASP ZAP and browser tools to inspect the generated session values.
 
-​#### OWASP ZAP:
-​* **Proxy History Log (POST):**
+#### OWASP ZAP:
+
+* **Proxy History Log (POST):**
 ​26/10/2026, 07:28:02 to 07:28:08 – Multiple sequential POST requests were captured hitting /vulnerabilities/weak_id/, returning 200 OK status codes for each generated token. 
- 
-​* **Cookie Inspection:**
-​Browser storage telemetry revealed that dvwaSession tokens incremented sequentially (e.g., moving from 17 up through 19 and 20), rather than utilizing a cryptographically secure random number generator (CSPRNG).  
+
+* **Cookie Inspection:**
+​Browser storage telemetry revealed that dvwaSession tokens incremented sequentially (e.g., moving from 17 up through 19 and 20), rather than utilizing a cryptographically secure random number generator (CSPRNG).
 
 #### Result
 Demonstrated that session tokens can be easily anticipated or brute-forced, allowing unauthorized actors to forge valid session tokens and impersonate legitimate authenticated users.
