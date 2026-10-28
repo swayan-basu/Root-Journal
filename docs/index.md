@@ -11,4 +11,6 @@ This journal tracks hands-on security research, web application penetration test
 * **Web Testing Labs**: In-depth vulnerability reports (including DVWA, Juice Shop, etc.).
 * **TryHackMe**: Room solves and walkthroughs.
 
-                             ---> <---_____---> <---
+<br>
+<p align="center"> ----> <----___----> <---- </p>
+                             
