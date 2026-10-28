@@ -1,0 +1,2748 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documenting practical lab challenges, practical learning writeups, and walkthroughs.">
+      
+      
+        <meta name="author" content="Swayan Basu">
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/rootjournal.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>DVWA Assessment - Root Journal</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dvwa-security-testing-writeups-low-level-owasp-zap-manual-exploitation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Root Journal" class="md-header__button md-logo" aria-label="Root Journal" data-md-component="logo">
+      
+  <img src="../../assets/images/rootjournal.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Root Journal
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DVWA Assessment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Web Testing Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Root Journal" class="md-nav__button md-logo" aria-label="Root Journal" data-md-component="logo">
+      
+  <img src="../../assets/images/rootjournal.png" alt="logo">
+
+    </a>
+    Root Journal
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Testing Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web Testing Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DVWA Assessment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DVWA Assessment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dvwa-security-testing-writeups-low-level-owasp-zap-manual-exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DVWA Security Testing Writeups (Low Level) — OWASP ZAP &amp; Manual Exploitation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DVWA Security Testing Writeups (Low Level) — OWASP ZAP &amp; Manual Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab Environment Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-testing-summary-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Testing Summary &amp; Methodology
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Testing Summary &amp; Methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-detailed-testing-vulnerability-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Detailed Testing &amp; Vulnerability Breakdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Detailed Testing &amp; Vulnerability Breakdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#module-1-brute-force" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 1: Brute Force
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 1: Brute Force">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-2-command-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 2: Command Injection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 2: Command Injection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-3-cross-site-request-forgery-csrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 3: Cross-Site Request Forgery (CSRF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 3: Cross-Site Request Forgery (CSRF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-4-file-inclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 4: File Inclusion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 4: File Inclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-5-unrestricted-file-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 5: Unrestricted File Upload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 5: Unrestricted File Upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-6-insecure-captcha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 6: Insecure CAPTCHA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 6: Insecure CAPTCHA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-7-sql-injection-error-based-blind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 7: SQL Injection (Error-Based &amp; Blind)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 7: SQL Injection (Error-Based &amp; Blind)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap-network-telemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP &amp; Network Telemetry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-8-weak-session-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 8: Weak Session IDs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 8: Weak Session IDs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-9-xss-dom-reflected-stored" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 9: XSS (DOM, Reflected, Stored)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 9: XSS (DOM, Reflected, Stored)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-10-csp-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 10: CSP Bypass
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 10: CSP Bypass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-11-javascript-attacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 11: JavaScript Attacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 11: JavaScript Attacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploitation-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-12-authorisation-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 12: Authorisation Bypass
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 12: Authorisation Bypass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploitation-steps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-13-open-http-redirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 13: Open HTTP Redirect
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 13: Open HTTP Redirect">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intercepted-history-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intercepted History Log:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observation-during-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observation During Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dvwa-security-testing-writeups-low-level-owasp-zap-manual-exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DVWA Security Testing Writeups (Low Level) — OWASP ZAP &amp; Manual Exploitation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DVWA Security Testing Writeups (Low Level) — OWASP ZAP &amp; Manual Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab Environment Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-testing-summary-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Testing Summary &amp; Methodology
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Testing Summary &amp; Methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-detailed-testing-vulnerability-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Detailed Testing &amp; Vulnerability Breakdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Detailed Testing &amp; Vulnerability Breakdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#module-1-brute-force" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 1: Brute Force
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 1: Brute Force">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-2-command-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 2: Command Injection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 2: Command Injection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-3-cross-site-request-forgery-csrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 3: Cross-Site Request Forgery (CSRF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 3: Cross-Site Request Forgery (CSRF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-4-file-inclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 4: File Inclusion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 4: File Inclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-5-unrestricted-file-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 5: Unrestricted File Upload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 5: Unrestricted File Upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-recommendations_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remediation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-6-insecure-captcha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 6: Insecure CAPTCHA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 6: Insecure CAPTCHA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-7-sql-injection-error-based-blind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 7: SQL Injection (Error-Based &amp; Blind)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 7: SQL Injection (Error-Based &amp; Blind)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap-network-telemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP &amp; Network Telemetry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-8-weak-session-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 8: Weak Session IDs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 8: Weak Session IDs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-steps_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-9-xss-dom-reflected-stored" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 9: XSS (DOM, Reflected, Stored)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 9: XSS (DOM, Reflected, Stored)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-10-csp-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 10: CSP Bypass
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 10: CSP Bypass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-11-javascript-attacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 11: JavaScript Attacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 11: JavaScript Attacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploitation-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-12-authorisation-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 12: Authorisation Bypass
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 12: Authorisation Bypass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-details_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Details:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploitation-steps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation Steps:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-13-open-http-redirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module 13: Open HTTP Redirect
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module 13: Open HTTP Redirect">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploitation Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-zap_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP ZAP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intercepted-history-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intercepted History Log:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observation-during-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observation During Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>DVWA Assessment</h1>
+
+<h2 id="dvwa-security-testing-writeups-low-level-owasp-zap-manual-exploitation">DVWA Security Testing Writeups (Low Level) — OWASP ZAP &amp; Manual Exploitation</h2>
+<h3 id="lab-environment-setup">Lab Environment Setup</h3>
+<ul>
+<li><strong>Target:</strong> Damn Vulnerable Web Application (DVWA v1.0)</li>
+<li><strong>Target URL:</strong> <code>http://127.0.0.1:8080</code></li>
+<li><strong>Security Level of the Target:</strong> Low</li>
+<li><strong>Deployment Environment:</strong> Deployed on DVWA Instant lab container on Debian Linux. Installation done using <code>snap install instant-lab</code>.</li>
+<li><strong>Testing Tools:</strong> OWASP ZAP v2.17.0 (used local intercepting proxy) &amp; Mozilla Developer Tools.</li>
+</ul>
+<hr />
+<h2 id="1-testing-summary-methodology">1. Testing Summary &amp; Methodology</h2>
+<p>This write-up documents a hands-on web application security assessment performed against the DVWA or Damn vulnerable web application and testing performed to <strong>Low Security Level</strong>.</p>
+<h3 id="workflow">Workflow:</h3>
+<ol>
+<li>
+<p><strong>Lab Provisioning:</strong> Deployed the DVWA container using instant labs’ docker interface.</p>
+</li>
+<li>
+<p><strong>Proxy &amp; Interception Setup:</strong> Configured OWASP ZAP as a local HTTP proxy listening on <code>127.0.0.1:8081</code></p>
+</li>
+<li>
+<p><strong>Reconnaissance &amp; Mapping:</strong> Performed ZAP Manual Explore to map endpoints of the target(<code>/login.php</code>, <code>/index.php</code>, <code>/vulnerabilities/</code>).</p>
+</li>
+<li>
+<p><strong>Targeted Exploitation:</strong> Tested almost every attack module listed on DVWA web interface except Insecure Captcha as part of practice web testing.</p>
+</li>
+</ol>
+<hr />
+<h2 id="2-detailed-testing-vulnerability-breakdown">2. Detailed Testing &amp; Vulnerability Breakdown</h2>
+<h3 id="module-1-brute-force">Module 1: Brute Force</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/brute/</code></li>
+<li><strong>Severity:</strong> Medium / High</li>
+</ul>
+<h4 id="vulnerability-details">Vulnerability Details</h4>
+<p>The authentication form handles login submissions via HTTP <code>GET</code> requests and lacks automated protections such as rate-limiting, account lockouts, or CAPTCHA verification at low security levels. This allows attackers to systematically test credential lists using automated zap fuzzer.</p>
+<h4 id="testing-steps">Testing Steps</h4>
+<ol>
+<li>Navigated to the Brute Force module (<code>/vulnerabilities/brute/</code>)</li>
+<li>Captured a sample login request in OWASP ZAP to inspect query parameter serialization.</li>
+<li>Configured the <strong>OWASP ZAP Fuzzer</strong> by selecting the password parameter as the fuzz location and supplying a test wordlist.</li>
+<li>Executed the automated fuzzing attack and analyzed the resulting response body sizes to identify valid credentials.</li>
+</ol>
+<h4 id="owasp-zap">OWASP ZAP</h4>
+<ul>
+<li><strong>Fuzzed Parameter:</strong> <code>password</code> in the <code>GET</code> query string.</li>
+<li><strong>Telemetry Analysis:</strong> Monitored response size variations across multiple rapid requests to pinpoint authentication success conditions</li>
+</ul>
+<h4 id="remediation-recommendations">Remediation Recommendations</h4>
+<ul>
+<li><strong>Switch to POST Requests:</strong> Transmit sensitive credentials within the body of <code>POST</code> requests rather than exposing them in URL query parameters.</li>
+<li><strong>Implement Rate Limiting &amp; Lockouts:</strong> Apply exponential delays or temporary account lockouts after consecutive failed login attempts.</li>
+<li><strong>Multi-Factor Authentication:</strong> Require secondary verification mechanisms or CAPTCHA challenges to block automated bot traffic.</li>
+</ul>
+<h4 id="result">Result</h4>
+<p>Successfully demonstrated that the lack of automated defenses enables attackers to execute rapid credential guessing attacks against user accounts.</p>
+<p><img width="1536" height="141" alt="bf-zap" src="https://github.com/user-attachments/assets/c6c48274-9d95-4934-8875-2d0f112db7cb" />
+<img width="1391" height="854" alt="bf" src="https://github.com/user-attachments/assets/bb5e6a37-eba3-44ba-9d10-324e47155e68" /></p>
+<hr />
+<h3 id="module-2-command-injection">Module 2: Command Injection</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/exec/</code></li>
+<li><strong>Vulnerable Parameter:</strong> <code>ip</code></li>
+<li><strong>Severity:</strong> High / Critical</li>
+</ul>
+<h4 id="vulnerability-details_1">Vulnerability Details</h4>
+<p>The application implements a network utility ping script that incorporates user-supplied input directly into system shell commands without applying proper sanitization, filtering, or input validation against command-chaining characters (such as <code>;</code>, <code>|</code>, and <code>&amp;&amp;</code>).</p>
+<h4 id="testing-steps_1">Testing Steps:</h4>
+<ol>
+<li>Navigated to the Command Injection endpoint (<code>/vulnerabilities/exec/</code>).</li>
+<li>Entered test input (<code>127.0.0.1;</code>) into the target IP address input box.</li>
+<li>Intercepted and inspected the form submission traffic using OWASP ZAP to monitor parameter serialization and request handling.</li>
+<li>Observed the backend server response reflecting the execution output of the concatenated command sequence.</li>
+</ol>
+<h4 id="owasp-zap_1">OWASP ZAP</h4>
+<ul>
+<li><strong>Request Method (<code>POST</code>):</strong> Captured requests targeting <code>http://127.0.0.1:8080/vulnerabilities/exec/</code> returning <code>200 OK</code>.</li>
+<li><strong>Behavioral Response:</strong> The backend system shell executed the appended instructions sequentially alongside the primary ping utility function.</li>
+</ul>
+<h4 id="remediation-recommendations_1">Remediation Recommendations</h4>
+<ol>
+<li>Avoid Shell Execution: Use native language built-ins or safe programming APIs instead of passing user inputs directly to operating system shell utilities (e.g., using built-in socket or network libraries).</li>
+<li>Strict Whitelisting: If system commands must be executed, enforce a strict regex whitelist ensuring only valid IPv4/IPv6 address formats are accepted.</li>
+</ol>
+<h4 id="result_1">Result</h4>
+<p>Successfully demonstrated that unvalidated input parameters allow command chaining, granting attackers arbitrary Remote Code Execution (RCE) capabilities under the web server's user context.</p>
+<hr />
+<h3 id="module-3-cross-site-request-forgery-csrf">Module 3: Cross-Site Request Forgery (CSRF)</h3>
+<ul>
+<li><strong>Endpoint:</strong><code>/vulnerabilities/csrf/</code></li>
+<li><strong>Severity:</strong> Medium / High</li>
+</ul>
+<h4 id="vulnerability-details_2">Vulnerability Details</h4>
+<p>The password update form lacks anti-CSRF tokens (such as anti-CSRF or synchronizer tokens) and relies solely on predictable cookie-based session management (<code>PHPSESSID</code>). Because state-changing actions are handled via standard <code>GET</code> requests without validating the request origin, an attacker can trick an authenticated user into executing unauthorized commands.</p>
+<h4 id="testing-steps_2">Testing Steps</h4>
+<ol>
+<li>Navigated to the CSRF vulnerability module (<code>/vulnerabilities/csrf/</code>).</li>
+<li>Executed a password change request directly through the interface or via crafted URL query parameters (<code>password_new=admin&amp;password_conf=admin&amp;Change=Change</code>).</li>
+<li>Captured and inspected the request sequence using OWASP ZAP proxy history to verify that session cookies automatically authorize state modification.</li>
+</ol>
+<h4 id="owasp-zap_2">OWASP ZAP</h4>
+<ul>
+<li><strong>Request Method (<code>GET</code>):</strong></li>
+</ul>
+<pre><code class="language-http">  GET
+(http://127.0.0.1:8080/vulnerabilities/csrf/?password_new=admin&amp;password_conf=admin&amp;Change=Change) HTTP/1.1
+  Host: 127.0.0.1:8080
+  Cookie: security=low
+PHPSESSID=1918049c64aedbbb198f608b70675cb7
+</code></pre>
+<p>​<strong>Proxy History Log:</strong> Captured consecutive telemetry entries tracking repeated credential update payloads returning a 200 OK status.  </p>
+<h4 id="results">Results:</h4>
+<ul>
+<li><strong>Application Response:</strong> The server processed the request and displayed the confirmation text: "Password Changed."</li>
+<li><strong>Validation Flaw:</strong> The application successfully modified the account credentials without requiring the user to re-enter their current password or verifying a unique per-session cryptographic token.</li>
+</ul>
+<h4 id="remediation-recommendations_2">Remediation Recommendations:</h4>
+<ul>
+<li><strong>Implement Anti-CSRF Tokens:</strong> Embed unique, unpredictable, server-validated tokens into all state-changing form submissions.</li>
+<li><strong>Require Re-Authentication:</strong> Force users to provide their existing password before allowing credential updates.
+​* <strong>Use POST for State Changes:</strong> Restrict sensitive data modifications to POST requests rather than predictable GET parameters.</li>
+</ul>
+<p><img width="1570" height="36" alt="csrf-zap02" src="https://github.com/user-attachments/assets/1f6063b0-3422-4bed-8a5d-1e85d42163f1" />
+<img width="813" height="292" alt="csrf-zap" src="https://github.com/user-attachments/assets/b868bfac-4d40-4c2c-bf87-c70a755959c9" />
+<img width="1394" height="851" alt="csrf" src="https://github.com/user-attachments/assets/e927a1ea-d447-4e61-bab1-622383599a12" /></p>
+<hr />
+<h3 id="module-4-file-inclusion">Module 4: File Inclusion</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/fi/</code></li>
+<li><strong>Vulnerable Parameter:</strong> <code>page</code></li>
+<li><strong>Severity:</strong> High</li>
+</ul>
+<h4 id="vulnerability-details_3">Vulnerability Details</h4>
+<p>The application takes user input via the <code>page</code> parameter and passes it directly into a file inclusion function (such as <code>include()</code> or <code>require()</code>) without sufficient validation, filtering, or path whitelisting. This allows attackers to manipulate the parameter to dynamically load arbitrary local files or external resources.</p>
+<h4 id="testing-steps_3">Testing Steps</h4>
+<ol>
+<li>Navigated to the File Inclusion endpoint (<code>/vulnerabilities/fi/</code>).</li>
+<li>Observed the default navigation options which pass filenames via the URL query string (e.g., <code>?page=file1.php</code>).</li>
+<li>Tested parameter handling by manually specifying target local files (<code>?page=file1.php</code>) directly in the URL bar and monitoring application output.</li>
+</ol>
+<h4 id="owasp-zap_3">OWASP ZAP</h4>
+<ul>
+<li><strong>Request Method (<code>GET</code>):</strong> Captured requests targeting <code>http://127.0.0.1:8080/vulnerabilities/fi/?page=file1.php</code> returning <code>200 OK</code>.</li>
+<li><strong>Behavioral Response:</strong> The backend successfully resolved and rendered the script contents dynamically based entirely on the user-controlled parameter value.</li>
+</ul>
+<h4 id="remediation-recommendations_3">Remediation Recommendations</h4>
+<ul>
+<li><strong>Enforce Strict Whitelisting:</strong> Use a hardcoded array or map matching allowed keys to explicit file paths rather than accepting arbitrary user input.</li>
+<li><strong>Disable Remote Inclusion:</strong> Ensure PHP configurations have <code>allow_url_include</code> turned off to mitigate remote file inclusion risks.</li>
+</ul>
+<h4 id="result_2">Result</h4>
+<p>Demonstrated that the application dynamically evaluates and loads files based on unvalidated user input, potentially exposing sensitive source code or system configurations.</p>
+<p><img width="1388" height="672" alt="file inclusion" src="https://github.com/user-attachments/assets/e4d2cea9-d731-433e-8d7d-0182894d9deb" /></p>
+<hr />
+<h3 id="module-5-unrestricted-file-upload">Module 5: Unrestricted File Upload</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/upload/</code></li>
+<li><strong>Vulnerable Function:</strong> File upload form</li>
+<li><strong>Severity:</strong> High</li>
+</ul>
+<h4 id="vulnerability-details_4">Vulnerability Details</h4>
+<p>The application permits users to upload files without restricting file extensions or validating MIME/Content-Type headers on the server side. Additionally, uploaded files are stored in a web-accessible directory (<code>../../hackable/uploads/</code>) with execute permissions, allowing arbitrary code execution.</p>
+<h4 id="testing-steps_4">Testing Steps:</h4>
+<ol>
+<li>Navigated to the File Upload endpoint (<code>/vulnerabilities/upload/</code>).</li>
+<li>Created a basic proof-of-concept PHP script (<code>shell.php</code>).</li>
+<li>Intercepted and submitted the upload request using OWASP ZAP to inspect the HTTP request parameters.</li>
+<li>Verified that the server returned a <code>200 OK</code> HTTP status and displayed the file save path (<code>../../hackable/uploads/shell.php</code>).</li>
+</ol>
+<h4 id="owasp-zap_4">OWASP ZAP</h4>
+<ul>
+<li><strong>Request Method:</strong> <code>POST http://0.0.0.0:8080/vulnerabilities/upload/</code></li>
+<li><strong>Content-Type:</strong> <code>multipart/form-data</code></li>
+<li><strong>Uploaded File:</strong> <code>filename="shell.php"</code> with <code>Content-Type: application/x-php</code></li>
+<li><strong>Response:</strong> File accepted and written to disk without restriction</li>
+</ul>
+<h4 id="remediation-recommendations_4">Remediation Recommendations</h4>
+<ul>
+<li><strong>Extension Whitelisting:</strong> Validate file extensions on the server side against a strict whitelist of allowed safe types (e.g., <code>.png</code>, <code>.jpg</code>, <code>.pdf</code>).</li>
+<li><strong>Content Validation:</strong> Inspect file headers and re-encode images to ensure malicious code cannot be embedded.</li>
+<li><strong>Storage Controls:</strong> Store uploaded files outside the web root directory and disable script execution permissions on upload folders.</li>
+</ul>
+<h4 id="result_3">Result</h4>
+<p>Demonstrated that an attacker can upload arbitrary code to the server web directory, leading to complete remote server compromise.</p>
+<p><img width="813" height="274" alt="fileuplaod-zap03" src="https://github.com/user-attachments/assets/576129a5-5548-4596-a880-a22f63757317" />
+<img width="1389" height="865" alt="file-upload" src="https://github.com/user-attachments/assets/4119baac-53fa-47e1-9ec0-ba7d40b289ca" />
+<img width="1566" height="58" alt="fileupload04" src="https://github.com/user-attachments/assets/44120ed3-aea2-406e-8b11-8cb06273f832" />
+<img width="822" height="243" alt="fileupload-zap" src="https://github.com/user-attachments/assets/5b040942-7ef7-4e94-bbb6-028e44533495" /></p>
+<hr />
+<h3 id="module-6-insecure-captcha">Module 6: Insecure CAPTCHA</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/captcha/</code></li>
+<li><strong>Status:</strong> Skipped / Pending Configuration Fix</li>
+</ul>
+<h4 id="note">Note:</h4>
+<p>This module could not be tested because the containerized environment restricts direct configuration file edits. Without valid reCAPTCHA API keys defined, the application suppresses the password-reset form inputs entirely, preventing local interaction with the workflow.</p>
+<hr />
+<h3 id="module-7-sql-injection-error-based-blind">Module 7: SQL Injection (Error-Based &amp; Blind)</h3>
+<ul>
+<li><strong>Endpoints:</strong>
+        1. Standard: <code>/vulnerabilities/sqli/</code>
+        2. Blind: <code>/vulnerabilities/sqli_blind/</code></li>
+<li><strong>Vulnerable Parameter:</strong> <code>id</code></li>
+<li><strong>Severity:</strong> High</li>
+</ul>
+<h4 id="vulnerability-details_5">Vulnerability Details:</h4>
+<p>The target application incorporates user-supplied input directly into database queries without using parameterized statements or proper input validation. This allows attackers to manipulate the database logic by appending malicious SQL commands.</p>
+<h4 id="testing-steps_5">Testing Steps:</h4>
+<ul>
+<li><strong>Standard SQL Injection Testing:</strong></li>
+<li>Navigated to <code>/vulnerabilities/sqli/</code>.</li>
+<li>Injected a boolean-always-true payload (<code>1' OR '1'='1</code>) into the <code>id</code> input field.</li>
+<li>
+<p>Observed the database query evaluation via the browser network tab and application response.</p>
+</li>
+<li>
+<p><strong>Blind SQL Injection Testing:</strong></p>
+</li>
+<li>Navigated to <code>/vulnerabilities/sqli_blind/</code></li>
+<li>Submitted the same logical payload (<code>1' OR '1'='1</code>) into the <code>id</code> field.</li>
+<li>Monitored the application's conditional state responses since data is not directly printed to the screen.</li>
+</ul>
+<h4 id="owasp-zap-network-telemetry">OWASP ZAP &amp; Network Telemetry</h4>
+<ul>
+<li>
+<p><strong>Standard SQLi Request (<code>GET</code>):</strong>
+Captured requests targeting <code>/vulnerabilities/sqli/?id=1%27+OR+%271%27%3D%271&amp;Submit=Submit</code> returning <code>200 OK</code></p>
+</li>
+<li>
+<p><strong>Blind SQLi Request (<code>GET</code>):</strong>
+Captured requests targeting <code>/vulnerabilities/sqli_blind/?id=1%27+OR+%271%27%3D%271&amp;Submit=Submit</code> returning <code>200 OK</code></p>
+</li>
+</ul>
+<h4 id="results_1">Results</h4>
+<ul>
+<li><strong>Standard SQLi Result:</strong> The injected condition forced the database query to evaluate as <code>TRUE</code> for all table rows, dumping all user accounts (<code>admin</code>, <code>Gordon</code>, <code>Hack</code>, <code>Pablo</code>, <code>Bob</code>) directly to the interface.</li>
+<li><strong>Blind SQLi Result:</strong> Although the database did not print record values, the application confirmed vulnerability by changing state, displaying the affirmative validation message: <em>"User ID exists in the database."</em></li>
+</ul>
+<h4 id="impact">Impact</h4>
+<p>Demonstrates critical database exposure where unauthorized users can bypass authentication logic, read sensitive records, or completely compromise backend data storage.</p>
+<p><img width="1494" height="830" alt="sql-blind" src="https://github.com/user-attachments/assets/4adf763d-8a9c-45f3-91e6-e91dcb3303e9" />
+<img width="1490" height="815" alt="sql-blind01" src="https://github.com/user-attachments/assets/d447d1f5-223f-4ccc-8bc0-7a43ed328f19" />
+<img width="816" height="282" alt="sqli-blind-zap" src="https://github.com/user-attachments/assets/c008cf1b-5b27-41dc-ae97-49905c734c5c" />
+<img width="1489" height="824" alt="sql-inj" src="https://github.com/user-attachments/assets/ce4ace97-28b4-41f3-90bd-47ff536020c0" />
+<img width="812" height="281" alt="sqli-zap02" src="https://github.com/user-attachments/assets/93948b48-e6aa-40d3-905d-ffe6cc16da97" />
+<img width="1614" height="186" alt="sqli-zap" src="https://github.com/user-attachments/assets/36f3f6a1-55a5-4a49-a5af-c571c5b34175" /></p>
+<hr />
+<h3 id="module-8-weak-session-ids">Module 8: Weak Session IDs</h3>
+<ul>
+<li><strong>Endpoint:</strong> /vulnerabilities/weak_id/
+​* <strong>Severity:</strong> Medium</li>
+</ul>
+<h4 id="vulnerability-details_6">Vulnerability Details:</h4>
+<p>​The application generates session tokens (cookies) using a predictable pattern or incremental counter (such as sequential numbers). Because the values follow a recognizable sequence, an attacker can easily anticipate or calculate future session IDs to hijack active user accounts.
+​</p>
+<h4 id="testing-steps_6">Testing Steps:</h4>
+<ol>
+<li>Navigated to the Weak Session IDs endpoint (/vulnerabilities/weak_id/).
+​2. Clicked the Generate button multiple times to issue new dvwa Session cookies.</li>
+<li>Monitored OWASP ZAP and browser tools to inspect the generated session values.</li>
+</ol>
+<h4 id="owasp-zap_5">OWASP ZAP:</h4>
+<ul>
+<li>
+<p><strong>Proxy History Log (POST):</strong>
+​26/10/2026, 07:28:02 to 07:28:08 – Multiple sequential POST requests were captured hitting /vulnerabilities/weak_id/, returning 200 OK status codes for each generated token. </p>
+</li>
+<li>
+<p><strong>Cookie Inspection:</strong>
+​Browser storage telemetry revealed that dvwaSession tokens incremented sequentially (e.g., moving from 17 up through 19 and 20), rather than utilizing a cryptographically secure random number generator (CSPRNG).</p>
+</li>
+</ul>
+<h4 id="result_4">Result</h4>
+<p>Demonstrated that session tokens can be easily anticipated or brute-forced, allowing unauthorized actors to forge valid session tokens and impersonate legitimate authenticated users.</p>
+<p><img width="1495" height="841" alt="weak-session-id" src="https://github.com/user-attachments/assets/f0c47001-10aa-46b2-871c-cf39921aa90a" />
+<img width="824" height="336" alt="weak-session-zap" src="https://github.com/user-attachments/assets/572fad70-1e89-4a93-8420-e940b9e1b51a" />
+<img width="1626" height="302" alt="weak-session-zap02" src="https://github.com/user-attachments/assets/cc4e9d83-3245-49cc-92eb-20a673e55eb9" /></p>
+<hr />
+<h3 id="module-9-xss-dom-reflected-stored">Module 9: XSS (DOM, Reflected, Stored)</h3>
+<ul>
+<li><strong>Endpoints:</strong></li>
+<li>DOM: <code>/vulnerabilities/xss_d/</code></li>
+<li>Reflected: <code>/vulnerabilities/xss_r/</code></li>
+<li>Stored: <code>/vulnerabilities/xss_s/</code></li>
+<li><strong>Severity:</strong> High</li>
+</ul>
+<h4 id="vulnerability-details_7">Vulnerability Details</h4>
+<p>The application handles user input unsafely across three distinct vectors without proper sanitization or output encoding:
+1. Reflected XSS: Immediately echoes input from HTTP query parameters back into the browser's response page.
+2. DOM-Based XSS: Client-side scripts process input directly from the browser's URL parameters or environment locally.
+3. Stored XSS: Saves malicious script input permanently into the backend database (such as guestbook comments) to execute for every visiting user.</p>
+<h4 id="testing">Testing:</h4>
+<ul>
+<li><strong>Reflected Testing:</strong> Injected a lowercase script payload (<code>&lt;script&gt;alert('reflect')&lt;/script&gt;</code>) via the input parameter. 
+Network Tab Telemetry: 
+The browser inspector captured the incoming <code>GET</code> request to <code>/vulnerabilities/xss_r/</code> returning a <code>200 OK</code> status with the payload fully reflected in the request URI.</li>
+<li><strong>DOM Testing:</strong> Appended script payloads to the URL parameters (<code>?default=&lt;script&gt;alert('DOM')&lt;/script&gt;</code>) to manipulate client-side JavaScript execution.</li>
+<li><strong>Stored Testing:</strong> Posted script payloads into the guestbook message fields to ensure persistence and automatic execution on reload.</li>
+</ul>
+<h4 id="result_5">Result</h4>
+<p>Successfully demonstrated that arbitrary JavaScript can be executed within the victim's browser context across all three vectors, highlighting risks like session cookie theft, account compromise, and unauthorized actions.</p>
+<p><img width="1395" height="817" alt="xss-dom" src="https://github.com/user-attachments/assets/ab2dd086-7c37-4e42-b667-d282df582786" />
+<img width="1393" height="835" alt="xss-reflacted" src="https://github.com/user-attachments/assets/c3e3a800-582c-4c18-897c-661d46b8f686" />
+<img width="1394" height="835" alt="xss-storerd" src="https://github.com/user-attachments/assets/85979cfd-26b6-44b4-aad8-ae8f1a2a20cc" />
+<img width="1618" height="282" alt="xss-zap" src="https://github.com/user-attachments/assets/1bb4d264-b2f8-4065-9df2-ee0fdce303c0" /></p>
+<hr />
+<h3 id="module-10-csp-bypass">Module 10: CSP Bypass</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/csp/</code></li>
+<li><strong>Severity:</strong> Medium</li>
+</ul>
+<h4 id="vulnerability-details_8">Vulnerability Details</h4>
+<p>Content Security Policy (CSP) restricts the external domains from which a browser is allowed to load and execute scripts. In this module, the policy configuration or input handling permits external domain references, which can be tested using external script endpoints or JSONP callback vectors.</p>
+<h4 id="testing-details">Testing Details:</h4>
+<ul>
+<li>
+<p><strong>Payload Tested:</strong>
+Submitted an external script URL parameter targeting an external endpoint (e.g., <code>https://duckduckgo.com/?q=ABC&amp;callback=bypassalert</code>).</p>
+</li>
+<li>
+<p><strong>Network Tab Telemetry:</strong>
+The browser initiated a <code>POST</code> request to <code>/vulnerabilities/csp/</code>.
+ A subsequent external <code>GET</code> request was dispatched to <code>duckduckgo.com</code> to fetch the script payload, resulting in policy evaluation.</p>
+</li>
+</ul>
+<h4 id="result_6">Result</h4>
+<p>Demonstrates how content security policies interact with external script requests. When weak or permissive rules allow third-party script inclusion endpoints, it highlights the risks of policy bypasses via trusted domain endpoints or JSONP callbacks.</p>
+<p><img width="1395" height="784" alt="csp" src="https://github.com/user-attachments/assets/fd5f540d-a6b8-46c6-a83e-9bee2dc355d1" />
+<img width="1591" height="59" alt="csp_zap" src="https://github.com/user-attachments/assets/d70940cb-ada2-40ef-9d09-038a41eeee64" /></p>
+<hr />
+<h3 id="module-11-javascript-attacks">Module 11: JavaScript Attacks</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/javascript/</code></li>
+<li><strong>Severity:</strong> Low / Medium</li>
+</ul>
+<h4 id="vulnerability-details_9">Vulnerability Details:</h4>
+<p>This module demonstrates the risks of relying strictly on client-side controls (code running in the user's browser) for security validation. The web page uses a local script to generate a hidden token and check whether a user entered the correct phrase ("success") before allowing a win state. Because these scripts run entirely on the client side, users can inspect, modify, and override them</p>
+<h4 id="owasp-zap_6">OWASP ZAP</h4>
+<p>During testing, OWASP ZAP logged the traffic flow for this module:
+* <strong>Page Access:</strong> 
+  * <code>26/10/2026, 05:54:14</code> – <code>GET</code> request to <code>/vulnerabilities/javascript/</code> (<code>200 OK</code>)
+* <strong>Form Submission:</strong> 
+  * <code>26/10/2026, 06:03:40</code> &amp; <code>06:07:18</code> – <code>POST</code> requests submitted after interacting with the script controls (<code>200 OK</code>)</p>
+<h4 id="exploitation-steps">Exploitation Steps</h4>
+<ol>
+<li>Opened the webpage and observed that typing a regular phrase resulted in an "Invalid token" error.</li>
+<li>Opened the browser's Developer Tools Console (<code>F12</code>).</li>
+<li>Manually forced the input value to the required string and executed the hidden token script directly from the console:
+   ```javascript
+   document.getElementById("phrase").value = "success";
+   generate_token();</li>
+</ol>
+<h4 id="result_7">Result:</h4>
+<p>Client-side security controls can be completely bypassed using browser dev tools.</p>
+<p><img width="1397" height="923" alt="javascript" src="https://github.com/user-attachments/assets/82621b2c-5399-4b66-b784-a8bddfae616d" />
+<img width="1395" height="884" alt="javascript02" src="https://github.com/user-attachments/assets/fd83714c-945b-4a99-8ec6-21df11c59b5f" />
+<img width="1639" height="62" alt="javscript_zap" src="https://github.com/user-attachments/assets/dba86727-58f4-466d-ba30-81e85dcb4e89" /></p>
+<hr />
+<h3 id="module-12-authorisation-bypass">Module 12: Authorisation Bypass</h3>
+<ul>
+<li><strong>Endpoint:</strong> /vulnerabilities/authbypass/</li>
+<li><strong>Severity:</strong> High / Critical</li>
+</ul>
+<h4 id="vulnerability-details_10">Vulnerability Details:</h4>
+<p>This module demonstrates broken access control flaws where low-privileged users can access administrative features due to improper server-side authorization checks. While the page is intended strictly for the <code>admin</code> account, the application fails to enforce permission validation on request parameters, allowing unauthorized users (e.g., <code>gordonb</code> / <code>abc123</code>) to view and modify user account details.</p>
+<h4 id="exploitation-steps_1">Exploitation Steps:</h4>
+<ol>
+<li>Intercept HTTP requests using OWASP ZAP configured on proxy port <code>8081</code>.</li>
+<li>Authenticate or navigate to the Authorisation Bypass endpoint (<code>/vulnerabilities/authbypass/</code>).</li>
+<li>Modify user details within the User Manager form fields (such as updating names for entries like <code>root</code>, <code>writeups</code>, <code>Auth</code>).</li>
+<li>Submit the modified parameters directly to the server without administrative re-authentication.</li>
+</ol>
+<h4 id="owasp-zap_7">OWASP ZAP:</h4>
+<p>During manual proxy testing, OWASP ZAP logged the following HTTP activity:</p>
+<ul>
+<li><strong>Endpoint Access (<code>GET</code>):</strong>
+  <code>26/10/2026, 05:20:06</code> – <code>GET</code> <code>/vulnerabilities/authbypass/</code> returning status <code>200 OK</code>.</li>
+<li><strong>Unauthorized Modification (<code>POST</code>):</strong>
+   <code>26/10/2026, 05:21:28</code> to <code>05:21:30</code> – Sequential <code>POST</code> requests sent to <code>/vulnerabilities/authbypass/ch...</code>
+   The server returned HTTP <code>200 OK</code> for each request, confirming profile modification attempts were accepted.</li>
+</ul>
+<h4 id="result_8">Result:</h4>
+<p>The application displayed a <code>"Save Successful"</code> notification and updated user record entries (such as <code>root</code>, <code>writeups</code>, <code>Auth</code>, <code>Gordon</code>, <code>admin</code>). This confirms that horizontal and vertical access controls were absent, allowing non-admin sessions to perform administrative updates</p>
+<p><img width="1636" height="171" alt="authbypass-zap" src="https://github.com/user-attachments/assets/b0b3606f-41c5-4bba-b017-a7b5e55ddceb" />
+<img width="1260" height="870" alt="authbypass" src="https://github.com/user-attachments/assets/1c7bd51d-21ca-4f61-97db-c3583628ec81" /></p>
+<hr />
+<h3 id="module-13-open-http-redirect">Module 13: Open HTTP Redirect</h3>
+<ul>
+<li><strong>Endpoint:</strong> <code>/vulnerabilities/open_redirect/</code></li>
+<li><strong>Severity:</strong> Low / Medium</li>
+</ul>
+<h4 id="exploitation-details">Exploitation Details</h4>
+<p>The application handles redirect parameters and source info pages (<code>/vulnerabilities/open_redirect/source/info.php?id=1</code>) where input handling can be manipulated</p>
+<h4 id="owasp-zap_8">OWASP ZAP:</h4>
+<p>During manual proxy exploration, OWASP ZAP recorded the exact HTTP request sequence as parameters were manipulated:</p>
+<h4 id="intercepted-history-log">Intercepted History Log:</h4>
+<ul>
+<li><code>26/10/2026, 05:06:05</code> – <code>GET</code> <code>/vulnerabilities/open_redirect/</code></li>
+<li><code>26/10/2026, 05:06:05</code> to <code>05:06:16</code> (IDs 51–54) – Sequential <code>GET</code> requests to <code>/vulnerabilities/open_redirect/...</code> showing rapid parameter changes on the local target (<code>http://127.0.0.1:8080</code>)</li>
+</ul>
+<h4 id="observation-during-testing">Observation During Testing</h4>
+<p>Manipulating parameters like the <code>id</code> field (e.g., changing <code>id=1</code> to other values) cycles through internal database records or hacker quote entries. While lower risk for static test content, unvalidated parameter routing or open redirects can become severe vulnerabilities in production environments if abused in phishing campaigns to redirect users to malicious domains, or if combined with object enumeration</p>
+<h4 id="result_9">Result</h4>
+<p>Demonstrates a lack of strict input sanitization and destination validation on routing parameters. It can be abused in phishing campaigns to trick users into navigating to malicious external domains while trusting the original hostname; however, during direct parameter manipulation, it functions closer to an IDOR (Insecure Direct Object Reference) behavior.</p>
+<p><img width="1636" height="135" alt="open-http-redirect-zap" src="https://github.com/user-attachments/assets/68ee5ceb-8162-4480-aa70-2fee811fd768" /></p>
+<hr />
+<h2 id="3-conclusion">3. Conclusion</h2>
+<p>This hands-on security assessment of the Damn Vulnerable Web Application (DVWA) at the Low security level highlights the fundamental risks associated with unvalidated inputs, insecure state management, broken access controls, and client-side trust dependencies. </p>
+<p>By utilizing <strong>OWASP ZAP</strong> for request interception, parameter manipulation, and fuzzing, this assessment successfully documented vulnerabilities ranging from medium-severity information exposure to critical. Implementing the recommended server-side mitigations—such as input sanitization, strict whitelisting, parameterized queries, and anti-CSRF tokens—is vital for hardening web applications against similar exploitation vectors. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "content.code,copy", "navigation.tabs", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
